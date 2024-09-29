@@ -1,11 +1,121 @@
+
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
+    <head>
+        <title>My Page</title>
+        <style>
+            body {
+                background-image: url(bg1.jpeg);
+                background-repeat: no-repeat;
+                background-size: cover;
+                display: grid;                 /* Enables flexbox */
+                justify-content: center;        /* Horizontally center */
+                align-items: center;            /* Vertically center */
+                height: 100vh;                  /* Ensures the body height covers the full viewport */
+                margin: 0;
+            }
+
+            div {
+                width: auto;
+                height: auto;                   /* Set height as auto to adjust according to content */
+                text-align: center;
+                border: 5px double grey;
+                border-radius: 20px;
+                padding: 30px;
+                opacity: 0.8;
+                     /* Optional: background to make the form stand out */
+            }
+
+           
+
+            
+        </style>
+    </head>
+    <body>
+        <div id="form">
+            <table border="3px">
+                <tr>
+                    <th>NAME</th>
+                    <td><input  id="name"  placeholder="enter your name"></td>
+                </tr>
+                <tr>
+                    <th>AGE</th>
+                    <td><input  id="age"    placeholder="age"></td>
+                </tr>
+                <tr>
+                    <th>GENDER</th>
+                    <td>
+                        <input     type="radio" name="gen" value="male"> Male
+                        <input    type="radio" name="gen" value="female"> Female
+                    </td>
+                </tr>
+                <tr>
+                    <th>COURSE</th>
+                    <td>
+                        <select id="sel">
+                            <option>JavaScript</option>
+                            <option>Java</option>
+                            <option>C</option>
+                            <option>Python</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th>EMAIL</th>
+                    <td><input  id="mail"   placeholder="abc123@gmail.com"></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><button style="background-color: aqua;" onclick="saving()">Save</button></td>
+                </tr>
+            </table>
+        </div>
+        <div>
+        <table border="3px" style=" color: white;">
+            <tr>
+                <th>NAME</th>
+                <th>AGE</th>
+                <th>GENDER</th>
+                <th>COURSE</th><th>MAIL</th><th>ACTION</th>
+            </tr>
+            <tbody id="table-body">
+                <!-- New entries will be added here -->
+                </tbody>
+           
+
+        </table></div>
+        <script>
+            
+            function saving()
+            {
+                var N=document.querySelector("#name").value;
+                var A=document.querySelector("#age").value;
+                var G=document.querySelector('input[name="gen"]:checked')?.value;
+                var C=document.querySelector("#sel").value;
+                var M=document.querySelector("#mail").value;
+                var tableBody = document.querySelector("#table-body");
+                var newRow = document.createElement("tr");
+                if (!N || !A || !G || !C || !M) {
+                    alert("Please fill out all fields.");
+                    return;
+                }
+               
+
+                newRow.innerHTML = 
+                    `<td>${N}</td>
+                    <td>${A}</td>
+                    <td>${G}</td>
+                    <td>${C}</td>
+                    <td>${M}</td>
+                    <button class="deletebutton" style="background-color:red;"onclick="this.parentElement.parentElement.remove()">delete<button>`
+                ;
+                tableBody.appendChild(newRow);  
+                document.querySelector("#name").value = '';
+                document.querySelector("#age").value = '';
+                document.querySelector('input[name="gen"]:checked').checked = false;
+                document.querySelector("#sel").selectedIndex = 0; 
+                document.querySelector("#mail").value = '';
+                
+            }
+        </script>
+    </body>
 </html>
